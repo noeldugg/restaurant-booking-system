@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {% if form.instance.id %}
+        Update Booking
+    {% else %}
+        Create New Booking
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="mb-0">
+                        {% if form.instance.id %}
+                            <i class="fas fa-edit me-2"></i>Update Booking
+                        {% else %}
+                            <i class="fas fa-calendar-plus me-2"></i>New Booking
+                        {% endif %}
+                    </h4>
+                </div>
+                <div class="card-body">
+                    {% if not form.instance.id %}
+                    <div class="alert alert-info">
+                        <h5 class="alert-heading">Booking Details</h5>
+                        <p class="mb-0">You are booking <strong>Table {{ table.number }}</strong> (capacity: {{ table.capacity }}) for <strong>{{ num_guests }} guest{{ num_guests|pluralize }}</strong> on <strong>{{ date|date:"l, F j, Y" }}</strong> at <strong>{{ time|time:"g:i A" }}</strong>.</p>
+                    </div>
+                    {% endif %}
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary">
+                                {% if form.instance.id %}
+                                    <i class="fas fa-save me-2"></i>Update Booking
+                                {% else %}
+                                    <i class="fas fa-check me-2"></i>Confirm Booking
+                                {% endif %}
+                            </button>
+                            <a href="{% if form.instance.id %}{% url 'booking-detail' form.instance.id %}{% else %}{% url 'search_availability' %}{% endif %}" class="btn btn-outline-secondary">
+                                <i class="fas fa-times me-2"></i>Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-muted">
+                    <small>
+                        <i class="fas fa-info-circle me-1"></i> 
+                        Note: Bookings are held for 15 minutes after the reserved time. Please contact us if you're running late.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

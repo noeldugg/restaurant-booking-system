@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Fine Dining - Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero text-center">
+    <div class="container">
+        <h1>Experience Fine Dining</h1>
+        <p class="lead">Book your table today and enjoy an unforgettable culinary journey</p>
+        <a href="{% url 'search_availability' %}" class="btn btn-light btn-lg mt-3">
+            <i class="fas fa-calendar-check me-2"></i>Book a Table
+        </a>
+    </div>
+</section>
+
+<!-- Quick Booking Form -->
+<section class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="mb-0"><i class="fas fa-search me-2"></i>Find a Table</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'search_availability' %}">
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label for="{{ form.date.id_for_label }}" class="form-label">Date</label>
+                                {{ form.date|add_class:"form-control" }}
+                            </div>
+                            <div class="col-md-4">
+                                <label for="{{ form.time.id_for_label }}" class="form-label">Time</label>
+                                {{ form.time|add_class:"form-control" }}
+                            </div>
+                            <div class="col-md-4">
+                                <label for="{{ form.num_guests.id_for_label }}" class="form-label">Guests</label>
+                                {{ form.num_guests|add_class:"form-control" }}
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2 mt-3">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-search me-2"></i>Find Available Tables
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Us Section -->
+<section class="container my-5">
+    <div class="row align-items-center">
+        <div class="col-lg-6">
+            <h2>About Our Restaurant</h2>
+            <p class="lead">Exquisite dining experiences since 1995</p>
+            <p>Fine Dining Restaurant offers an exquisite culinary experience with a menu that combines traditional and contemporary cuisine. Our chefs use only the freshest ingredients to create memorable dishes that will delight your taste buds.</p>
+            <p>Located in the heart of the city, our restaurant provides an elegant and comfortable atmosphere for a romantic dinner, a family celebration, or a business lunch.</p>
+            <a href="#" class="btn btn-outline-primary">Learn More About Us</a>
+        </div>
+        <div class="col-lg-6 mt-4 mt-lg-0">
+            <img src="{% static 'images/restaurant.jpg' %}" alt="Restaurant Interior" class="img-fluid rounded shadow" onerror="this.src='https://via.placeholder.com/600x400?text=Restaurant+Interior'">
+        </div>
+    </div>
+</section>
+
+<!-- Featured Menu Items -->
+<section class="container my-5">
+    <h2 class="text-center mb-4">Chef's Recommendations</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card h-100">
+                <img src="{% static 'images/dish1.jpg' %}" class="card-img-top" alt="Featured Dish" onerror="this.src='https://via.placeholder.com/300x200?text=Grilled+Salmon'">
+                <div class="card-body">
+                    <h5 class="card-title">Grilled Salmon</h5>
+                    <p class="card-text">Fresh Atlantic salmon grilled to perfection, served with roasted vegetables and lemon-dill sauce.</p>
+                    <p class="text-primary fw-bold">$24.99</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <img src="{% static 'images/dish2.jpg' %}" class="card-img-top" alt="Featured Dish" onerror="this.src='https://via.placeholder.com/300x200?text=Beef+Tenderloin'">
+                <div class="card-body">
+                    <h5 class="card-title">Beef Tenderloin</h5>
+                    <p class="card-text">Premium beef tenderloin cooked to your liking, accompanied by truffle mashed potatoes and red wine reduction.</p>
+                    <p class="text-primary fw-bold">$32.99</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <img src="{% static 'images/dish3.jpg' %}" class="card-img-top" alt="Featured Dish" onerror="this.src='https://via.placeholder.com/300x200?text=Chocolate+Fondant'">
+                <div class="card-body">
+                    <h5 class="card-title">Chocolate Fondant</h5>
+                    <p class="card-text">Warm chocolate cake with a molten center, served with vanilla ice cream and seasonal berries.</p>
+                    <p class="text-primary fw-bold">$12.99</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-4">
+        <a href="{% url 'menu' %}" class="btn btn-outline-primary">View Full Menu</a>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="bg-light py-5 my-5">
+    <div class="container">
+        <h2 class="text-center mb-4">What Our Customers Say</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="text-warning mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="card-text">"The food was absolutely delicious, and the service was impeccable. We had a wonderful evening celebrating our anniversary!"</p>
+                    </div>
+                    <div class="card-footer bg-white border-0">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">JD</div>
+                            <div class="ms-3">
+                                <h6 class="mb-0">John Doe</h6>
+                                <small class="text-muted">Visited March 2023</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4 mt-md-0">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="text-warning mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="card-text">"Chef's special was outstanding! The flavors were perfectly balanced, and the presentation was beautiful. Will definitely be back!"</p>
+                    </div>
+                    <div class="card-footer bg-white border-0">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">JS</div>
+                            <div class="ms-3">
+                                <h6 class="mb-0">Jane Smith</h6>
+                                <small class="text-muted">Visited February 2023</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4 mt-md-0">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="text-warning mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="card-text">"The online booking system was so easy to use, and the staff were very accommodating with our special requests. The food was exceptional!"</p>
+                    </div>
+                    <div class="card-footer bg-white border-0">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">RJ</div>
+                            <div class="ms-3">
+                                <h6 class="mb-0">Robert Johnson</h6>
+                                <small class="text-muted">Visited January 2023</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
